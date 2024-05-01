@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({Key? key, required this.img}) : super(key: key);
+  const ProductImage({super.key, required this.img, required this.onClick, required this.icon});
 
   final String img;
+  final Function()? onClick;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,21 @@ class ProductImage extends StatelessWidget {
           width: 170,
           child: Image.network(img)
         ),
-        const Positioned(
+        Positioned(
           top: 10,
-          left: 10,
-          child: Icon(FontAwesomeIcons.trash),
+          right: 10,
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.pink.shade50
+            ),
+            child: IconButton(
+              onPressed: onClick,
+              icon: Icon(icon, size: 25,)
+            ),
+          ),
         ),
       ]
     );
